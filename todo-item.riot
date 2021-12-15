@@ -1,0 +1,26 @@
+<todo-item>
+  <li>
+    <span id='text-field'>{ props.text }</span>
+    <span>
+      <button onclick={ EmitRemoveItem }>X</button>
+    </span>
+  </li>
+
+  <style>
+    #text-field {
+      padding-right: 10px;
+    }
+
+    button {
+      color: red;
+    }
+  </style>
+
+  <script>
+  export default {
+    EmitRemoveItem() {
+      this.props.onRemove(this.root);
+    }
+  }
+  </script>
+</todo-item>

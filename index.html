@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <todo-app></todo-app>
+
+    <script src="todo-app.riot" type="riot"></script>
+    <script src="todo-item.riot" type="riot"></script>
+    <script src="todo-list.riot" type="riot"></script>
+    <script src="todo-input.riot" type="riot"></script>
+    <script src="https://unpkg.com/riot@6/riot+compiler.min.js"></script>
+
+    <script>
+    riot.compile().then(() => {
+      riot.mount('todo-app');
+    });
+    </script>
+  </body>
+</html>

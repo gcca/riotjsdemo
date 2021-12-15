@@ -1,0 +1,17 @@
+<todo-app>
+  <todo-input on-push={ PushItem }></todo-input>
+  <todo-list lines={ state.todoLines }></todo-list>
+
+  <script>
+  export default {
+    onBeforeMount(props, state) {
+      state.todoLines = [];
+    },
+    PushItem(text) {
+      this.update({
+        todoLines: this.state.todoLines.concat([text])
+      });
+    }
+  }
+  </script>
+</todo-app>

@@ -1,0 +1,14 @@
+<todo-input>
+  <input/>
+  <button onclick={ Add }>+</button>
+
+  <script>
+  export default {
+    Add() {
+      inputElement = this.$('input');
+      this.props.onPush(inputElement.value);
+      inputElement.value = '';
+    }
+  }
+  </script>
+</todo-input>

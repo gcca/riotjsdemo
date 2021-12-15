@@ -1,0 +1,15 @@
+<todo-list>
+  <ul>
+    <todo-item each={ line in props.lines }
+               text={ line } on-remove={ RemoveItem }>
+    </todo-item>
+  </ul>
+
+  <script>
+  export default {
+    RemoveItem(todoItemElement) {
+      this.$('ul').removeChild(todoItemElement);
+    }
+  }
+  </script>
+</todo-list>
