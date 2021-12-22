@@ -1,14 +1,15 @@
 <todo-list>
   <ul>
-    <todo-item each={ line in props.lines }
-               text={ line } on-remove={ RemoveItem }>
-    </todo-item>
+    <li each={ todo in props.todos.list }>
+      <todo-item todo={ todo } on-remove={ RemoveItem }>
+      </todo-item>
+    </li>
   </ul>
 
   <script>
   export default {
-    RemoveItem(todoItemElement) {
-      this.$('ul').removeChild(todoItemElement);
+    RemoveItem(todo) {
+      this.props.onRemove(todo);
     }
   }
   </script>

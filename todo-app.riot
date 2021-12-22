@@ -1,16 +1,44 @@
 <todo-app>
   <todo-input on-push={ PushItem }></todo-input>
-  <todo-list lines={ state.todoLines }></todo-list>
+  <todo-list todos={ state.todos } on-remove={ OnRemoveTodo }></todo-list>
 
   <script>
+
+  class TodoModel {
+    constructor(text) {
+      this.text = text;
+    }
+
+    static Make(text) {
+      return new TodoModel(text);
+    }
+  }
+
+  class TodosModel {
+    constructor() {
+      this.list = [];
+    }
+    Append(text) {
+      this.list.push(TodoModel.Make(text));
+    }
+    Remove(todo) {
+      this.list.splice(this.list.indexOf(todo), 1);
+    }
+  }
+
+  // ------------------------------------------------------------------------
+
   export default {
-    onBeforeMount(props, state) {
-      state.todoLines = [];
+    state: {
+      todos: new TodosModel()
     },
     PushItem(text) {
-      this.update({
-        todoLines: this.state.todoLines.concat([text])
-      });
+      this.state.todos.Append(text);
+      this.update();
+    },
+    OnRemoveTodo(todo) {
+      this.state.todos.Remove(todo);
+      this.update();
     }
   }
   </script>
