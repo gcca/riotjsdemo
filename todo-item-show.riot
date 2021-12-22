@@ -1,9 +1,25 @@
 <todo-item-show>
-  <span>{ props.text }</span>
+  <span>
+    <input type="checkbox" onchange={ OnInputChange }
+           checked={ props.todo.check }/>
+    { props.todo.text }
+  </span>
 
   <style>
   span {
     padding-right: 10px;
   }
   </style>
+
+  <script>
+  export default {
+    OnInputChange() {
+      if (this.$('input').checked) {
+        this.props.todo.Check();
+      } else {
+        this.props.todo.Uncheck();
+      }
+    }
+  };
+  </script>
 </todo-item-show>

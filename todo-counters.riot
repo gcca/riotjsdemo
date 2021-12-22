@@ -1,0 +1,27 @@
+<todo-counters>
+  <span>Conteo: { state.checkedCount } | {state.totalCount}</span>
+
+  <script>
+  export default {
+    onBeforeMount(props, state) {
+      state.checkedCount = 0;
+      state.totalCount = 0;
+      props.todos.addEventListener('todos-changed', this.UpdateCounters);
+    },
+    UpdateCounters() {
+      let total = 0;
+      let checked = 0;
+      for (let todo of this.props.todos) {
+        total++;
+        if (todo.check) {
+          checked++;
+        }
+      }
+      this.update({
+        checkedCount: checked,
+        totalCount: total
+      });
+    }
+  };
+  </script>
+</todo-counters>

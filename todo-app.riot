@@ -1,28 +1,45 @@
 <todo-app>
   <todo-input on-push={ PushItem }></todo-input>
   <todo-list todos={ state.todos } on-remove={ OnRemoveTodo }></todo-list>
+  <todo-counters todos={ state.todos }></todo-counters>
 
   <script>
 
-  class TodoModel {
+  class TodoModel extends EventTarget {
     constructor(text) {
+      super();
       this.text = text;
+      this.check = false;
     }
-
+    Check() {
+      this.check = true;
+      this.dispatchEvent(new Event('change-check'));
+    }
+    Uncheck() {
+      this.check = false;
+      this.dispatchEvent(new Event('change-check'));
+    }
     static Make(text) {
       return new TodoModel(text);
     }
   }
 
-  class TodosModel {
+  class TodosModel extends EventTarget {
     constructor() {
+      super();
       this.list = [];
     }
     Append(text) {
-      this.list.push(TodoModel.Make(text));
+      let todo = TodoModel.Make(text);
+      todo.addEventListener('change-check', () => this.OnTodoChangeCheck());
+      this.list.push(todo);
+      this.dispatchEvent(new Event('todos-changed'));
     }
     Remove(todo) {
       this.list.splice(this.list.indexOf(todo), 1);
+    }
+    OnTodoChangeCheck() {
+      this.dispatchEvent(new Event('todos-changed'));
     }
     *[Symbol.iterator]() {
       yield* this.list;

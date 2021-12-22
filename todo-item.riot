@@ -1,5 +1,5 @@
 <todo-item>
-  <todo-item-show if={ !state.editable } text={ state.text }>
+  <todo-item-show if={ !state.editable } todo={ props.todo }>
     </todo-item-show>
   <todo-item-edit if={ state.editable }
       text={ state.text } on-change-text={ UpdateTodoText }>
