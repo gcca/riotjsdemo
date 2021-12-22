@@ -1,0 +1,14 @@
+<todo-item-edit>
+  <input value={ props.text } onchange={ OnInputChange }/>
+
+  <script>
+  export default {
+    onMounted() {
+      this.$('input').focus();
+    },
+    OnInputChange() {
+      this.props.onChangeText(this.$('input').value);
+    }
+  };
+  </script>
+</todo-item-edit>

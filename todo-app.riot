@@ -24,6 +24,9 @@
     Remove(todo) {
       this.list.splice(this.list.indexOf(todo), 1);
     }
+    *[Symbol.iterator]() {
+      yield* this.list;
+    }
   }
 
   // ------------------------------------------------------------------------

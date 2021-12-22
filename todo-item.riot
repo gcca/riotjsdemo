@@ -1,23 +1,41 @@
 <todo-item>
-  <span id='text-field'>{ props.todo.text }</span>
+  <todo-item-show if={ !state.editable } text={ state.text }>
+    </todo-item-show>
+  <todo-item-edit if={ state.editable }
+      text={ state.text } on-change-text={ UpdateTodoText }>
+    </todo-item-edit>
   <span>
-    <button onclick={ EmitRemoveItem }>X</button>
+    <button class="edit" onclick={ ToggleEdition }>E</button>
+    <button class="remove" onclick={ EmitRemoveItem }>X</button>
   </span>
 
   <style>
-    #text-field {
-      padding-right: 10px;
-    }
+  button.edit {
+    color: blue;
+  }
 
-    button {
-      color: red;
-    }
+  button.remove {
+    color: red;
+  }
   </style>
 
   <script>
   export default {
+    onBeforeMount(props, state) {
+      state.editable = false;
+      state.text = this.props.todo.text;
+    },
     EmitRemoveItem() {
       this.props.onRemove(this.props.todo);
+    },
+    ToggleEdition() {
+      this.update({
+        editable: !this.state.editable,
+        text: this.props.todo.text
+      });
+    },
+    UpdateTodoText(text) {
+      this.props.todo.text = text;
     }
   }
   </script>
