@@ -37,6 +37,7 @@
     }
     Remove(todo) {
       this.list.splice(this.list.indexOf(todo), 1);
+      this.dispatchEvent(new Event('todos-changed'));
     }
     OnTodoChangeCheck() {
       this.dispatchEvent(new Event('todos-changed'));
